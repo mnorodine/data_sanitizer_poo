@@ -1,0 +1,6 @@
+from __future__ import annotations
+from typing import Protocol, Tuple
+
+class TickerResolver(Protocol):
+    def has_enough_history(self, ticker: str, min_days: int = 10) -> Tuple[bool, int]: ...
+    def resolve(self, symbol: str) -> tuple[str | None, int]: ...

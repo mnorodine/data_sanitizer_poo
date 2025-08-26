@@ -1,0 +1,9 @@
+from __future__ import annotations
+from typing import Protocol, Optional
+
+class EquitiesRepo(Protocol):
+    def get_targets(self, limit: Optional[int], only: Optional[list[str]]) -> list[tuple[str, str]]: ...
+    def get_existing_ticker(self, isin: str, symbol: str) -> Optional[str]: ...
+    def mark_attempt(self, isin: str, symbol: str, *, success: bool,
+                     ticker: Optional[str], cnt_1y: int, cnt_total: int,
+                     touch_w_date: bool = True) -> None: ...

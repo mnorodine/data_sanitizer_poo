@@ -1,0 +1,28 @@
+[project]
+name = "data-sanitizer"
+version = "3.0.0a0"
+description = "POO refonte with ports/adapters for equities data sanitation"
+authors = [{name="You"}]
+requires-python = ">=3.10"
+dependencies = [
+    "psycopg[binary]>=3.2",
+    "yfinance>=0.2.52",
+    "pandas>=2.2",
+    "typer>=0.12",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+data-sanitizer = "data_sanitizer.cli.__main__:main"
+
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["data_sanitizer*"]
+exclude = [
+  "datas*", "reports*", "providers*", "migrations*", "Temp*",
+  "sql*", "tests*", "scripts*", "docs*", "reports *"
+]
