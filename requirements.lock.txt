@@ -4,7 +4,7 @@ cffi==1.17.1
 charset-normalizer==3.4.3
 click==8.2.1
 curl_cffi==0.13.0
--e git+ssh://git@github.com/mnorodine/data_sanitizer.git@779f7558e649d68f07b1793e75d371227358e088#egg=data_sanitizer&subdirectory=../../../data_sanitizer_poo
+-e git+ssh://git@github.com/mnorodine/data_sanitizer_poo.git@2316e0f9cab4079838a2629cb143a918e7b1363f#egg=data_sanitizer&subdirectory=../../../data_sanitizer_poo
 frozendict==2.4.6
 idna==3.10
 iniconfig==2.1.0

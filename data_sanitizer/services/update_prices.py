@@ -27,7 +27,7 @@ class UpdatePricesService:
             start = since or self.prices.last_price_date(isin, symbol)
             bars = list(self.market.download_history(ticker, start))
             if not dry_run:
-                inserted = self.prices.upsert_bars(isin, symbol, bars)
+                self.prices.upsert_bars(isin, symbol, bars)
                 cnt_total, cnt_1y = self.prices.recompute_counts(isin, symbol)
                 self.prices.update_bounds(isin, symbol)
                 self.equities.mark_attempt(isin, symbol, success=True, ticker=ticker,
