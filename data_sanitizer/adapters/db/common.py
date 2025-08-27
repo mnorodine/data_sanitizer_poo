@@ -1,18 +1,29 @@
+# data_sanitizer/adapters/db/common.py
 from __future__ import annotations
 
-from contextlib import contextmanager
+import contextlib
+from typing import Iterator
+
 import psycopg
+
 from data_sanitizer.config import get_settings
 
-@contextmanager
-def get_pg():
-    s = get_settings()
-    conn = psycopg.connect(s.database_url)
+
+@contextlib.contextmanager
+def get_pg() -> Iterator[psycopg.Connection]:
+    """
+    Ouvre une connexion Postgres à partir de DATABASE_URL (chargé via .env automatiquement).
+    """
+    settings = get_settings()
+    try:
+        conn = psycopg.connect(settings.database_url)
+    except Exception as e:  # connexion impossible → message clair
+        raise RuntimeError(
+            "Connexion Postgres impossible. Vérifie DATABASE_URL dans ton .env "
+            f"(valeur actuelle: {settings.database_url!r}). Détail: {e}"
+        ) from e
     try:
         yield conn
-        conn.commit()
-    except Exception:
-        conn.rollback()
-        raise
     finally:
-        conn.close()
+        with contextlib.suppress(Exception):
+            conn.close()
