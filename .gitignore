@@ -10,3 +10,10 @@ outputs/
 dist/
 build/
 *.egg-info/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+.venv/
